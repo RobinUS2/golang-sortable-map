@@ -1,4 +1,4 @@
-# golang-sortable-map  [![Build Status](https://travis-ci.org/RobinUS2/golang-sortable-map.svg?branch=master)](https://travis-ci.org/RobinUS2/tsxdb)
+# golang-sortable-map  [![Build Status](https://travis-ci.org/RobinUS2/golang-sortable-map.svg?branch=master)](https://travis-ci.org/RobinUS2/golang-sortable-map)
 Map which can be iterated over in a sorted stable fashion
 
 ## Usage
