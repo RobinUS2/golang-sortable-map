@@ -5,14 +5,43 @@ import (
 	"testing"
 )
 
+func TestFromMap(t *testing.T) {
+	m := map[int64]float64{
+		1: 2.0,
+		4: 5.0,
+		2: 3.0,
+		0: 3.0,
+	}
+	data, err := sortablemap.FromMap(m)
+	if err != nil {
+		t.Error(err)
+	}
+	if data == nil {
+		t.Error()
+	}
+	if data.Len() != 4 {
+		t.Error(data)
+	}
+	iter := data.Iterator()
+	for iter.Next() {
+		k, v := iter.Value()
+		i := k.Int64()
+		f := v.Float64()
+		t.Logf("%+v %+v %d %.0f", k, v, i, f)
+	}
+}
+
 func TestQueryResult_Iterator(t *testing.T) {
-	res := sortablemap.QueryResult{
-		Results: map[uint64]float64{
+	res, err := sortablemap.FromMap(
+		map[uint64]float64{
 			1: 2.0,
 			4: 5.0,
 			2: 3.0,
 			0: 3.0,
 		},
+	)
+	if err != nil {
+		t.Error(err)
 	}
 	n := len(res.Results)
 	if n != 4 {
@@ -24,7 +53,9 @@ func TestQueryResult_Iterator(t *testing.T) {
 	{
 		iterN := 0
 		for iter.Next() {
-			ts, val := iter.Value()
+			k, v := iter.Value()
+			ts := k.Uint64()
+			val := v.Float64()
 			if iterN == 0 {
 				if ts != 0 {
 					t.Error(ts)
