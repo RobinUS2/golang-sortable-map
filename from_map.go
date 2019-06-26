@@ -79,10 +79,22 @@ func DataFromMap(v interface{}) (*Data, error) {
 			for k, v := range m {
 				addResult(k, v)
 			}
+		} else if data.ValueType == reflect.Ptr {
+			m := v.(map[int64]*interface{})
+			initResults(len(m))
+			for k, v := range m {
+				addResult(k, v)
+			}
 		}
 	} else if data.KeyType == reflect.String {
 		if data.ValueType == reflect.Interface {
 			m := v.(map[string]interface{})
+			initResults(len(m))
+			for k, v := range m {
+				addResult(k, v)
+			}
+		} else if data.ValueType == reflect.Ptr {
+			m := v.(map[string]*interface{})
 			initResults(len(m))
 			for k, v := range m {
 				addResult(k, v)
@@ -143,6 +155,12 @@ func DataFromMap(v interface{}) (*Data, error) {
 			for k, v := range m {
 				addResult(k, v)
 			}
+		} else if data.ValueType == reflect.Ptr {
+			m := v.(map[uint64]*interface{})
+			initResults(len(m))
+			for k, v := range m {
+				addResult(k, v)
+			}
 		}
 	} else if data.KeyType == reflect.Float64 {
 		if data.ValueType == reflect.Float64 {
@@ -171,6 +189,12 @@ func DataFromMap(v interface{}) (*Data, error) {
 			}
 		} else if data.ValueType == reflect.Interface {
 			m := v.(map[float64]interface{})
+			initResults(len(m))
+			for k, v := range m {
+				addResult(k, v)
+			}
+		} else if data.ValueType == reflect.Ptr {
+			m := v.(map[float64]*interface{})
 			initResults(len(m))
 			for k, v := range m {
 				addResult(k, v)

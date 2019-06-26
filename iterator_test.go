@@ -153,6 +153,28 @@ func TestFromMapFloatInt64(t *testing.T) {
 	}
 }
 
+func TestFromMapUint64Ptr(t *testing.T) {
+	type testPtrType struct {
+		A int64
+	}
+	m := map[uint64]interface{}{
+		4.0: &testPtrType{2},
+		1.0: &testPtrType{5},
+		3.0: &testPtrType{3},
+		2.0: &testPtrType{3},
+	}
+	data, err := sortablemap.DataFromMap(m)
+	if err != nil {
+		t.Error(err)
+	}
+	if data == nil {
+		t.Error()
+	}
+	if data.Len() != 4 {
+		t.Error(data)
+	}
+}
+
 func TestFromMapInt64Bool(t *testing.T) {
 	m := map[int64]bool{
 		4: true,
