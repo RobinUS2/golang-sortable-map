@@ -1,7 +1,7 @@
 package sortablemap_test
 
 import (
-	"github.com:RobinUS2/golang-sortable-map"
+	"github.com/RobinUS2/golang-sortable-map"
 	"testing"
 )
 
